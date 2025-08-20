@@ -1,0 +1,11 @@
+const express = require('express');
+const app = express();
+const {authenticate,isAdmin,loggedout}=require('../middleware/middleware');
+const router = express.Router();
+const accountmemberController = require('../controllers/accountmemberController');
+router.post('/create', authenticate, isAdmin, loggedout, accountmemberController.createaccountmember);
+router.get('/get', authenticate,  loggedout, accountmemberController.getaccountmember);
+router.get('/get/:id', authenticate,  loggedout, accountmemberController.getaccountmemberById);
+router.post('/create/:id', authenticate, isAdmin, loggedout, accountmemberController.updateaccountmember);
+router.post('/delete/:id', authenticate, isAdmin, loggedout, accountmemberController.deleteaccountmember);
+module.exports = router;
